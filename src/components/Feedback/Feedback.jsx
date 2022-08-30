@@ -6,8 +6,8 @@ import { Btn } from "./Feedback.styled";
 export const Feedback = ({ options, onLeaveFeedback }) => {
     return (
         <Box display="flex" gridGap={4}>
-            {options.map((option, idx) => (
-                <Btn key={idx} onClick={onLeaveFeedback}>
+            {options.map(option => (
+                <Btn key={option} onClick={onLeaveFeedback}>
                     {option}
                 </Btn>
             ))}

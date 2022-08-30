@@ -12,12 +12,17 @@ export class App extends Component {
     bad: 0,
   };
 
-  countTotalFeedback = e => {
+  changeStat = e => {
     
     const element = e.target.innerText.toLowerCase();
     this.setState(prevState => ({
       [element]: prevState[element] + 1,
     }));
+  };
+
+   countTotalFeedback = () => {
+    const { good, neutral, bad } = this.state;
+    return [good, neutral, bad].reduce((acc, num) => acc + num, 0);
   };
 
    
@@ -34,7 +39,7 @@ export class App extends Component {
       <>
         <Section title="Please leave feedback">
           <Feedback options={Object.keys(this.state)}
-            onLeaveFeedback={this.countTotalFeedback}
+            onLeaveFeedback={this.changeStat}
           />
         </Section>
         <Section title="Statistics">
@@ -43,7 +48,7 @@ export class App extends Component {
               good={good}
               neutral={neutral}
               bad={bad}
-              total={total}
+              total={this.countTotalFeedback()}
               positivePercentage={this.countPositiveFeedbackPercentage()} />
           ) : (<Notification message="There is no feedback"
           />
